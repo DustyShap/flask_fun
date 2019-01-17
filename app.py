@@ -13,7 +13,7 @@ def index():
 def picklelist():
     return redirect(url_for('picklechips'))
 
-@app.route('/picklelist/all', methods=['GET','POST'])
+@app.route('/picklelist/all', methods=['GET', 'POST'])
 def picklechips():
     if request.method == 'POST':
         ranked_chip = int(request.form['rank'])
@@ -32,8 +32,6 @@ def pickleranks(rank):
 @app.route('/picklelist/json')
 def picklejson():
     return jsonify(pickle_chips())
-
-
 
 def pickle_chips():
     request = requests.get(ENDPOINT)
