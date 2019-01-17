@@ -19,14 +19,14 @@ def picklechips():
         ranked_chip = int(request.form['rank'])
         if ranked_chip >= len(pickle_chips()):
             return 'Out of range!'
-        return pickle_chips()[ranked_chip]
+        return pickle_chips()[ranked_chip-1]
     return render_template('index.html', chip_list=pickle_chips())
 
 @app.route('/picklelist/<rank>')
 def pickleranks(rank):
-    ranked_chip = pickle_chips()[int(rank)]
-    if ranked_chip >= len(pickle_chips()):
+    if int(rank) >= len(pickle_chips()):
         return 'Out of range!'
+    ranked_chip = pickle_chips()[int(rank)-1]
     return ranked_chip
 
 @app.route('/picklelist/json')
