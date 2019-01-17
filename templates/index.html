@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chips</title>
+  </head>
+  <body>
+    <a href='/picklelist/all'>All Pickle Chips</a><br>
+    <a href='/picklelist/json'>All Pickle Chips JSON</a><br>
+    <form action='/picklelist/all' method='post'>
+      <a>Find a Chip by Rank</a>
+      <input type='number' name='rank' required=true>
+      <input type='submit'>
+    </form>
+    {% for chip in chip_list %}
+      <span>{{ chip }}</span><br>
+    {% endfor %}
+  </body>
+</html>
