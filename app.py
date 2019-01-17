@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, abort
 import requests
 
 app = Flask(__name__)
@@ -22,12 +22,15 @@ def picklechips():
         return pickle_chips()[ranked_chip-1]
     return render_template('index.html', chip_list=pickle_chips())
 
-@app.route('/picklelist/<rank>')
+@app.route('/picklelist/<int:rank>')
 def pickleranks(rank):
-    if int(rank) >= len(pickle_chips()):
-        return 'Out of range!'
-    ranked_chip = pickle_chips()[int(rank)-1]
-    return ranked_chip
+    #try except
+    try:
+        ranked_chip = pickle_chips()[rank-1]
+        return ranked_chip
+    except IndexError:
+        return abort(404)
+
 
 @app.route('/picklelist/json')
 def picklejson():
